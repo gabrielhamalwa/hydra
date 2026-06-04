@@ -1,0 +1,30 @@
+name: Build and Publish Hydra Wheel
+
+on:
+  workflow_dispatch:  # Manual trigger from GitHub Actions UI
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write  # Required for OIDC
+      contents: read
+    steps:
+      - name: Checkout Hydra repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.14
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+
+      - name: Install build tools
+        run: |
+          pip install build twine
+
+      - name: Build Hydra wheel
+        run: python -m build
+
+      - name: Publish to PyPI
+        run: |
+          twine upload --skip-existing dist/*

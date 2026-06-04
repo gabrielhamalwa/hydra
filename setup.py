@@ -31,7 +31,7 @@ with open("README.md") as fh:
             "build_py": BuildPyCommand,
             "develop": Develop,
         },
-        name="hydra-core",
+        name="hydra-core-py314",
         version=find_version("hydra", "__init__.py"),
         author="Omry Yadan",
         author_email="omry@fb.com",
